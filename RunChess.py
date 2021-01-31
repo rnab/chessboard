@@ -12,19 +12,25 @@ os.system('clear')
 print(board)
 
 while True:
-	m1=cb.get_board_input()
-
-	if m1=="button1":
-		board.push_san("d2d4")
-	elif m1=="button2":
-		board.push_san("e2e4")
-	elif m1=="button3":
-		board.push_uci("g1f3")
+	while True:
+		m1=cb.get_board_input()
+		print(m1)
+		sleep(0.5)
+		m2=cb.get_board_input()
+		print(m2)
+		try:
+			board.push_uci(m1+m2)
+		except Exception:
+			os.system('clear')
+			print(board)
+			continue
+		else:
+			break
 	
 	os.system('clear')
 	print(board)
 
-	sleep(1.0)
+	sleep(2.0)
 	result = engine.play(board, chess.engine.Limit(time=0.1))
 	board.push(result.move)
 

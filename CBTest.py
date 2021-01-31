@@ -31,4 +31,4 @@ def get_board_stream():
 		print(get_board_input())
 		sleep(0.1)
 
-get_board_stream()
+#get_board_stream()
