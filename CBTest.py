@@ -3,8 +3,11 @@ from time import sleep
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
-cols={2:'f',3:'g',4:'h'}
-rows={14:'1',15:'2',18:'3'}
+cols={21:'h',20:'g',16:'f',12:'e',1:'d',18:'c',15:'b',14:'a'}
+#rows={19:'1',13:'2',6:'3',5:'4',0:'5',4:'8',3:'6',2:'7'}
+
+cols={21:'h',20:'g',16:'f',12:'e',1:'d',18:'c',15:'b',14:'a'}
+rows={19:'1',13:'2',6:'3',5:'4',0:'5',4:'8',22:'6',27:'7'}
 
 #Set up GPIO
 
@@ -22,7 +25,7 @@ def get_board_input():
 			for r in rows.keys():
 				if GPIO.input(r)==1:
 					return(cols[c]+rows[r])
-				sleep(0.01)
+				sleep(0.001)
 			GPIO.output(c,GPIO.LOW)
 
 		
