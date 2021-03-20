@@ -3,12 +3,12 @@ from time import sleep
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
-c_data=4
-a_data=18
-c_clock=2
-a_clock=14
-c_shift=3
-a_shift=15
+c_data=3
+a_data=2
+c_clock=17
+a_clock=17
+c_shift=4
+a_shift=4
 
 GPIO.setup(a_data,GPIO.OUT)
 GPIO.setup(c_data,GPIO.OUT)
@@ -24,6 +24,10 @@ def led_on(c,r):
 			GPIO.output(c_data,GPIO.LOW)
 		else:
 			GPIO.output(c_data,GPIO.HIGH)
+		if y in r:
+			GPIO.output(a_data,GPIO.HIGH)
+		else:
+			GPIO.output(a_data,GPIO.LOW)
 		sleep(0.001)
 		GPIO.output(c_clock,GPIO.HIGH)            # pull CLOCK pin high
 		sleep(0.001)
@@ -32,21 +36,6 @@ def led_on(c,r):
 	GPIO.output(c_shift,GPIO.HIGH)      # pull the SHIFT pin high to put the 8 bit data out parallel
 	sleep(0.001)
 	GPIO.output(c_shift,GPIO.LOW) 
-
-	#Set anode all low except target
-	for y in range(8):
-		if y in r:
-			GPIO.output(a_data,GPIO.HIGH)
-		else:
-			GPIO.output(a_data,GPIO.LOW)
-		sleep(0.001)
-		GPIO.output(a_clock,GPIO.HIGH)            # pull CLOCK pin high
-		sleep(0.001)
-		GPIO.output(a_clock,GPIO.LOW)            # pull CLOCK pin down, to send a rising edge
-		GPIO.output(a_data,GPIO.LOW)       # clear the DATA pin
-	GPIO.output(a_shift,GPIO.HIGH)      # pull the SHIFT pin high to put the 8 bit data out parallel
-	sleep(0.001)
-	GPIO.output(a_shift,GPIO.LOW)
 
 
 def led_off():
@@ -69,9 +58,9 @@ def led_off():
 	GPIO.output(c_shift,GPIO.HIGH)      # pull the SHIFT pin high to put the 8 bit data out parallel
 	GPIO.output(c_shift,GPIO.LOW)  
 
-
+led_off()
 led_on([0,1,2,3,4,5,6,7],[0,1,2,3,4,5,6,7])
-sleep(10)
+sleep(5)
 led_off()
 led_on([0],[0])
 sleep(1)
