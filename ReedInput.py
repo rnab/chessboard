@@ -70,14 +70,17 @@ def read_board2():
 	board=np.zeros((8,8))
 	
 	for c in cols.keys():
-		GPIO.setup(c,GPIO.OUT)
-		GPIO.output(c,GPIO.LOW)
+		#GPIO.setup(c,GPIO.OUT)
+		#GPIO.output(c,GPIO.LOW)
+		GPIO.setup(c,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+	
 	for r in rows.keys():
 		GPIO.setup(r,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
-	
+		
 	x=7
 	for c in cols.keys():
 		y=7
+		GPIO.setup(c,GPIO.OUT)
 		GPIO.output(c,GPIO.HIGH)
 		for r in rows.keys():
 			if GPIO.input(r)==1:
@@ -85,9 +88,12 @@ def read_board2():
 			else:
 				board[y][x]=0
 			y=y-1
-			sleep(0.0001)
+			#print(GPIO.input(r))
+			sleep(0.001)
 		x=x-1
-		GPIO.output(c,GPIO.LOW)
+		#GPIO.output(c,GPIO.LOW)
+		GPIO.setup(c,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+		sleep(0.001)
 	return(board)
 	
 #while True:
@@ -106,13 +112,13 @@ def convert_board(board):
 	return realboard[board==1]
 
 
-while True:
-	board=read_board2()
-	pre_board=board.copy()
-	sleep(0.5)
-	board=read_board2()
-	if (board!= pre_board).any():
-		#print(board-pre_board)
-		print(convert_board(abs(board-pre_board)))
+# ~ while True:
+	# ~ board=read_board2()
+	# ~ pre_board=board.copy()
+	# ~ sleep(0.5)
+	# ~ board=read_board2()
+	# ~ if (board!= pre_board).any():
+		# ~ #print(board-pre_board)
+		# ~ print(convert_board(abs(board-pre_board)))
 
 
