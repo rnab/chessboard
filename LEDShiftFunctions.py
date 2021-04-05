@@ -59,6 +59,51 @@ def led_on(board,t):
 		time.sleep(0.00000001)
 		GPIO.output(shift,GPIO.LOW)
 		x=x+1
+		
+def led_one(board):
+	for z in range(0,8):
+		if np.sum(board,0)[7-z]==1:
+			GPIO.output(c_data,GPIO.LOW)
+		else:
+			GPIO.output(c_data,GPIO.HIGH)
+		if np.sum(board,1)[7-z]==1:
+			GPIO.output(a_data,GPIO.HIGH)
+		else:
+			GPIO.output(a_data,GPIO.LOW)
+		time.sleep(0.00000001)
+		GPIO.output(clock,GPIO.HIGH)            # pull CLOCK pin high
+		time.sleep(0.00000001)
+		GPIO.output(clock,GPIO.LOW)            # pull CLOCK pin down, to send a rising edge
+			#GPIO.output(c_data,GPIO.HIGH)       # clear the DATA pin
+			#GPIO.output(a_data,GPIO.LOW)
+	GPIO.output(shift,GPIO.HIGH)      # pull the SHIFT pin high to put the 8 bit data out parallel
+	time.sleep(0.00000001)
+	GPIO.output(shift,GPIO.LOW)
+
+# ~ def led_on(board):
+	# ~ x=0
+	# ~ z= x % 8
+	# ~ for y in range(0,8):
+		# ~ if (7-z)==y:
+			# ~ GPIO.output(a_data,GPIO.HIGH)
+		# ~ else:
+			# ~ GPIO.output(a_data,GPIO.LOW)
+		# ~ if board[z][7-y]==1:
+			# ~ GPIO.output(c_data,GPIO.LOW)
+		# ~ else:
+			# ~ GPIO.output(c_data,GPIO.HIGH)
+		# ~ time.sleep(0.00000001)
+		# ~ GPIO.output(clock,GPIO.HIGH)            # pull CLOCK pin high
+		# ~ time.sleep(0.00000001)
+		# ~ GPIO.output(clock,GPIO.LOW)            # pull CLOCK pin down, to send a rising edge
+		# ~ #GPIO.output(c_data,GPIO.HIGH)       # clear the DATA pin
+		# ~ #GPIO.output(a_data,GPIO.LOW)
+	# ~ GPIO.output(shift,GPIO.HIGH)      # pull the SHIFT pin high to put the 8 bit data out parallel
+	# ~ time.sleep(0.00000001)
+	# ~ GPIO.output(shift,GPIO.LOW)
+	# ~ x=x+1
+
+
 
 
 def led_on_all():
