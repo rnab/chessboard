@@ -34,21 +34,34 @@ try:
 	while True:
 		#User turn
 		legal_move = False
+		return_move = False
+		led.led_off()
 		while legal_move is False:
 			m1=get_move()
 			sleep(0.1)
-			if np.sum(m1)==-1: #Add other check conditions
-				legal_move=True
-		led.led_one(-m1)
-		legal_move = False
-		while legal_move is False:
-			m2=get_move()
-			sleep(0.1)
-			if np.sum(m2)==1: #Add other check conditions
-				legal_move=True
+			if np.sum(m1)==-1:
+				led.led_one(-m1)
+				m2=get_move()
+				to_engine_1=rd.convert_board(abs(m1))
+				to_engine_2=rd.convert_board(abs(m2))
+				mv=to_engine_1+to_engine_2
+				sleep(0.1)
+				if np.sum(m2)==1 and np.array_equal(-m2,m1):
+					#Move cancelled
+					led.led_off()
+				elif np.sum(m2)==1 and chess.Move.from_uci(mv) in board.legal_moves:
+					#Legal move - progress
+					legal_move=True
+				else:
+					#Force return move
+					while return_move is False:
+						m3=get_move()
+						if np.array_equal(-m3,m1):
+							return_move=True
+							led.led_off()
+		
+		#If user enters a valid complete move then the second led lights
 		led.led_one(m2)
-		to_engine_1=rd.convert_board(abs(m1))
-		to_engine_2=rd.convert_board(abs(m2))
 		print(to_engine_1+to_engine_2)
 		board.push_uci(to_engine_1+to_engine_2)
 		
