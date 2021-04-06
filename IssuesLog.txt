@@ -1,0 +1,10 @@
+Issues log
+
+05/04/21
+d8 is very sticky - FIXED
+g8 is slightly sticky
+h7 is very sticky
+g2 is sticky
+b7 is very sticky
+d6 is sticky
+f3 is sticky
