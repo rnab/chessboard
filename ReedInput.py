@@ -62,9 +62,6 @@ def get_rc(board):
 		z=z+1
 
 
-#while True:
-#	board=read_board()
-#	get_rc(board)
 
 def read_board2():
 	board=np.zeros((8,8))
@@ -96,9 +93,6 @@ def read_board2():
 	return(board)
 
 
-#while True:
-#	board=read_board2()
-#	get_rc(board)
 
 def convert_board(board):
 	realboard=np.array([['a8', 'b8', 'c8', 'd8', 'e8', 'f8', 'g8', 'h8'],
@@ -122,14 +116,4 @@ def convert_move_to_board(s):
 						['a2', 'b2', 'c2', 'd2', 'e2', 'f2', 'g2', 'h2'],
 						['a1', 'b1', 'c1', 'd1', 'e1', 'f1', 'g1', 'h1']])
 	return ((realboard==s).astype(int))
-
-# ~ while True:
-	# ~ board=read_board2()
-	# ~ pre_board=board.copy()
-	# ~ sleep(0.5)
-	# ~ board=read_board2()
-	# ~ if (board!= pre_board).any():
-		# ~ #print(board-pre_board)
-		# ~ print(convert_board(abs(board-pre_board)))
-
 
