@@ -2,9 +2,42 @@ Issues log
 
 05/04/21
 d8 is very sticky - FIXED
-g8 is slightly sticky
-h7 is very sticky
-g2 is sticky
-b7 is very sticky
-d6 is sticky
-f3 is sticky
+d6 is sticky - FIXED
+h7 is very sticky - FIXED
+g8 is slightly sticky - appears to be fixed
+g2 is sticky - still a bit sticky
+b7 is sticky - appears to be fixed
+f3 is sticky - still a bit sticky
+b2 is a bit sticky but can be fixed with a tap
+h6 is a but sticky but can be fixed with a tap
+
+overnight test:
+b2 - slightly
+b7 - definitely bad
+d7 - slightl
+g2 - definitely bad
+
+overday test:
+b6
+g3 - definitely
+f5
+f3 - definitely
+b5
+
+
+Summary:
+b2
+b5
+b6
+b7
+d7
+f3
+f5
+g2
+g3
+h6
+h7
+e7
+c8
+a7
+f1?

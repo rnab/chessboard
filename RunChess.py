@@ -28,22 +28,24 @@ def get_move():
 	pre_board=board.copy()
 	while np.array_equal(move,np.zeros((8,8))) and GPIO.input(b1)==1 and GPIO.input(b4)==1:
 		board=rd.read_board2()
-		if abs(board-pre_board).any() >0:
+		if np.array_equal(board,pre_board) == False:
 			sleep(0.2)
-			board=rd.read_board2()
+			board2=rd.read_board2()
 			#Because of noise in the GPIO inputs we require two readings of the change,
 			#0.2s apart to record as an actual change to the board
-			if abs(board-pre_board).any() >0:
+			if np.array_equal(board,board2):
+			#if abs(board-pre_board).any() >0:
 			#print(rd.convert_board(abs(board-pre_board)))
 			#move=rd.convert_board(abs(board-pre_board))
 				move=board-pre_board
-		pre_board=board.copy()
-		sleep(0.1)
+		#pre_board=board.copy()
+		sleep(0.01)
 	if GPIO.input(b1)==0:
 		move=np.ones((8,8))
 	if GPIO.input(b4)==0:
 		print("Quit")
 		quit()
+	print(move)
 	return(move)
 
 
@@ -53,7 +55,7 @@ def user_move(board):
 	led.led_off()
 	while legal_move is False:
 		m1=get_move()
-		sleep(0.1)
+		#sleep(0.1)
 		
 		if np.sum(m1)==-1:
 			led.led_one(-m1)
@@ -61,7 +63,7 @@ def user_move(board):
 			to_engine_1=rd.convert_board(abs(m1))
 			to_engine_2=rd.convert_board(abs(m2))
 			mv=to_engine_1+to_engine_2
-			sleep(0.1)
+			sleep(0.01)
 			if np.sum(m2)==1 and np.array_equal(-m2,m1):
 				#Move cancelled
 				led.led_off()
@@ -94,7 +96,7 @@ def computer_move(board):
 	correct_move=False
 	while correct_move is False:
 		m1 = get_move()
-		sleep(0.1)
+		sleep(0.01)
 		if np.array_equal(m1,b1):
 			correct_move=True
 	led.led_off()
@@ -103,7 +105,7 @@ def computer_move(board):
 	correct_move=False
 	while correct_move is False:
 		m2 = get_move()
-		sleep(0.1)
+		sleep(0.01)
 		if np.array_equal(m2,b2):
 			correct_move=True
 	led.led_off()

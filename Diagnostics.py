@@ -25,7 +25,7 @@ try:
 		pre_board=board.copy()
 		while board.all()==pre_board.all():
 			print(board)
-			led.led_on(board,1)
+			#led.led_on(board,1)
 			board=rd.read_board2()
 			os.system('clear')
 
