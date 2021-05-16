@@ -91,3 +91,36 @@ def led_on_all():
 	GPIO.output(shift,GPIO.HIGH)      # pull the SHIFT pin high to put the 8 bit data out parallel
 	time.sleep(0.0001)
 	GPIO.output(shift,GPIO.LOW)
+
+
+def lightshow_1():
+	board=np.zeros((8,8))
+	led_off()
+	for i in range(0,8):
+		for j in range(0,8):
+			board[i,j]=1
+			led_on(board,0.01)
+
+def lightshow_2():
+	board=np.zeros((8,8))
+	led_off()
+	for i in range(0,4):
+		for j in range(0,8):
+			board[i,j]=1
+			board[7-i,7-j]=1
+			led_on(board,0.05)
+	led_on(np.zeros((8,8)),0.1)
+	led_on(np.ones((8,8)),1)
+	led_off()
+
+def led_N(t):
+	board=np.array( [[0,0,0,0,0,0,0,0],
+					 [0,0,0,0,0,0,0,0],
+					 [0,0,0,0,0,0,0,0],
+					 [0,0,0,0,0,0,0,0],
+					 [0,0,1,0,0,1,0,0],
+					 [0,0,1,1,0,1,0,0],
+					 [0,0,1,0,1,1,0,0],
+					 [0,0,1,0,0,1,0,0]])
+	led_on(board,t)
+	led_off()

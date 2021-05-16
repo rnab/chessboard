@@ -114,7 +114,28 @@ def computer_move(board):
 engine = chess.engine.SimpleEngine.popen_uci("/usr/games/stockfish")
 board = chess.Board()
 
+def init_board():
+	#led.led_N(1)
+	start_pos=np.array( [[0,0,0,0,0,0,0,0],
+						[0,0,0,0,0,0,0,0],
+						[0,0,0,0,0,0,0,0],
+						[0,0,0,0,0,0,0,0],
+						[0,0,0,0,0,0,0,0],
+						[0,0,0,0,0,0,0,0],
+						[0,0,0,0,0,0,1,1],
+						[0,0,0,0,0,0,1,1]])
+	board=rd.read_board2()
+	while np.array_equal(board,start_pos)==False:
+		board=rd.read_board2()
+		led.led_on(start_pos - board ,1)
+	print("Setup complete")				
+
+
+
+
 try:
+	init_board()
+	led.lightshow_2()
 	while board.is_game_over()==False:
 		user_move(board)
 		os.system('clear')
